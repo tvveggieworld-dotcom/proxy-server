@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Video Stream</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 900px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            color: #3b82f6;
+        }
+
+        /* Video Player Styling */
+        .video-wrapper {
+            position: relative;
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid #1e293b;
+            line-height: 0; /* Removes bottom whitespace in some browsers */
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 900px;
+            display: block;
+            outline: none;
+        }
+
+        /* Error Message Styling */
+        #errorMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #450a0a;
+            color: #fca5a5;
+            border: 1px solid #7f1d1d;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Loading Spinner Placeholder */
+        .loading-text {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        /* Customization for mobile responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Proxy Video Stream</h1>
+
+        <div class="video-wrapper">
+            <video 
+                id="mainPlayer" 
+                controls 
+                playsinline 
+                preload="metadata"
+                poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+                <source src="https://raw.githubusercontent.com/tvveggieworld-dotcom/proxy-server/main/proxyvideo.mp4" type="video/mp4">
+                Your browser does not support the HTML5 video tag.
+            </video>
+        </div>
+
+        <div id="errorMessage">
+            <strong>Stream Error:</strong> Unable to load the video. Please check your connection or the source URL.
+        </div>
+
+        <div class="loading-text">
+            Standard MP4 Stream • Auto-responsive
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Proxy Video Stream Player
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('mainPlayer');
+            const errorDiv = document.getElementById('errorMessage');
+
+            // Listen for errors on the video element
+            video.addEventListener('error', function(e) {
+                console.error("Video Error Detected:", e);
+                errorDiv.style.display = 'block';
+            }, true);
+
+            // Specifically check for source errors
+            const source = video.querySelector('source');
+            if (source) {
+                source.addEventListener('error', function(e) {
+                    errorDiv.style.display = 'block';
+                });
+            }
+
+            // Optional: Log successful metadata load
+            video.addEventListener('loadedmetadata', function() {
+                console.log("Video metadata loaded successfully.");
+            });
+        });
+    </script>
+</body>
+</html>
