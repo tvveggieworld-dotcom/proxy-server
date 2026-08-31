@@ -1,147 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Video Stream</title>
-    <style>
-        /* Base Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garena Free Fire Team</title>
 
-        .container {
-            width: 95%;
-            max-width: 900px;
-            text-align: center;
-            padding: 20px;
-        }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-        h1 {
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            color: #3b82f6;
-        }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #292929;
+  color: white;
+}
 
-        /* Video Player Styling */
-        .video-wrapper {
-            position: relative;
-            background-color: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            border: 1px solid #1e293b;
-            line-height: 0; /* Removes bottom whitespace in some browsers */
-        }
+.header {
+  background: #66c7e5;
+  padding: 22px 10px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
 
-        video {
-            width: 100%;
-            height: auto;
-            max-width: 900px;
-            display: block;
-            outline: none;
-        }
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 55px 20px 70px;
+  text-align: center;
+}
 
-        /* Error Message Styling */
-        #errorMessage {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #450a0a;
-            color: #fca5a5;
-            border: 1px solid #7f1d1d;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 38px;
+}
 
-        /* Loading Spinner Placeholder */
-        .loading-text {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 10px;
-        }
+video {
+  width: 100%;
+  border-radius: 22px;
+  display: block;
+  background: #111;
+  box-shadow: 0 5px 20px rgba(0,0,0,.5);
+}
 
-        footer {
-            margin-top: 40px;
-            font-size: 0.75rem;
-            color: #475569;
-        }
+.card {
+  margin-top: 45px;
+  padding: 30px 25px;
+  border-radius: 25px;
+  background: #111;
+  border: 4px solid #ff2b16;
+  box-shadow: 0 0 15px rgba(255,0,0,.35);
+}
 
-        /* Customization for mobile responsiveness */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  padding: 9px 18px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.new {
+  background: #ff3333;
+}
+
+.premium {
+  background: #7050ed;
+}
+
+.card h2 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.card p {
+  color: #ccc;
+  font-size: 19px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.stars {
+  color: gold;
+  font-size: 27px;
+  margin-bottom: 25px;
+}
+
+.install {
+  display: block;
+  text-decoration: none;
+  color: white;
+  background: #00e676;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 25px;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(0,255,100,.45);
+}
+
+.install:active {
+  transform: scale(.97);
+}
+
+.footer {
+  margin-top: 55px;
+  color: #777;
+  font-size: 16px;
+}
+
+@media(max-width:500px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .card h2 {
+    font-size: 27px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="container">
-        <h1>Proxy Video Stream</h1>
+<div class="header">
+  Garena Free Fire Team
+</div>
 
-        <div class="video-wrapper">
-            <video 
-                id="mainPlayer" 
-                controls 
-                playsinline 
-                preload="metadata"
-                poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
-                <source src="https://raw.githubusercontent.com/tvveggieworld-dotcom/proxy-server/main/proxyvideo.mp4" type="video/mp4">
-                Your browser does not support the HTML5 video tag.
-            </video>
-        </div>
+<div class="container">
 
-        <div id="errorMessage">
-            <strong>Stream Error:</strong> Unable to load the video. Please check your connection or the source URL.
-        </div>
+  <div class="title">
+    WATCH FULL VIDEO
+  </div>
 
-        <div class="loading-text">
-            Standard MP4 Stream • Auto-responsive
-        </div>
+  <video controls playsinline preload="metadata">
+    <source src="proxyvideo.mp4" type="video/mp4">
+    Your browser does not support video.
+  </video>
+
+  <div class="card">
+
+    <div class="badges">
+      <div class="badge new">NEW</div>
+      <div class="badge premium">PREMIUM</div>
     </div>
 
-    <footer>
-        &copy; 2024 Proxy Video Stream Player
-    </footer>
+    <h2>PROXY SERVER</h2>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('mainPlayer');
-            const errorDiv = document.getElementById('errorMessage');
+    <p>
+      FREE FIRE PROXY SERVER<br>
+      UNLIMITED ACCESS
+    </p>
 
-            // Listen for errors on the video element
-            video.addEventListener('error', function(e) {
-                console.error("Video Error Detected:", e);
-                errorDiv.style.display = 'block';
-            }, true);
+    <div class="stars">
+      ★★★★★
+    </div>
 
-            // Specifically check for source errors
-            const source = video.querySelector('source');
-            if (source) {
-                source.addEventListener('error', function(e) {
-                    errorDiv.style.display = 'block';
-                });
-            }
+    <a class="install"
+       href="https://1024terabox.com/s/1fUJ6rZ_9lfa_motQu3tXqg"
+       target="_blank"
+       rel="noopener">
+      ⬇️ Install
+    </a>
 
-            // Optional: Log successful metadata load
-            video.addEventListener('loadedmetadata', function() {
-                console.log("Video metadata loaded successfully.");
-            });
-        });
-    </script>
+  </div>
+
+  <div class="footer">
+    © 2024 Proxy Video Stream Player
+  </div>
+
+</div>
+
 </body>
 </html>
